@@ -6,10 +6,13 @@ export class Counter {
   }
 
   increment(): number{
-    return this.count++;
+    this.count++;
+    return this.count;
   };
+
   decrement(): number{
-    return this.count--;
+    this.count--;
+    return this.count;
   };
 
   getCount(): number {

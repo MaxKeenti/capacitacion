@@ -17,15 +17,15 @@ describe('Counter', () => {
 
   it('should increment the count', () => {
     // Act
-    counter.increment();
+    let result = counter.increment();
     // Assert
-    expect(counter.getCount()).toBe(1);
+    expect(result).toBe(1);
   });
 
   it('should decrement the count', () => {
     // Act
-    counter.decrement();
+    let result = counter.decrement();
     // Assert
-    expect(counter.getCount()).toBe(-1);
+    expect(result).toBe(-1);
   });
 });
