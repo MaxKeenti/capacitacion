@@ -1,12 +1,16 @@
-export abstract class Counter {
+export class Counter {
   protected count: number;
 
   constructor(initialCount: number = 0) {
     this.count = initialCount;
   }
 
-  abstract increment(): void;
-  abstract decrement(): void;
+  increment(): number{
+    return this.count++;
+  };
+  decrement(): number{
+    return this.count--;
+  };
 
   getCount(): number {
     return this.count;

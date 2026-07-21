@@ -3,20 +3,11 @@ import { describe, it, expect, beforeEach } from 'bun:test';
 
 describe('Counter', () => {
     // Arrange
-  class TestCounter extends Counter {
-    increment(): void {
-      this.count++;
-    }
 
-    decrement(): void {
-      this.count--;
-    }
-  }
-
-  let counter: TestCounter;
+  let counter: Counter;
 
   beforeEach(() => {
-    counter = new TestCounter(0);
+    counter = new Counter(0);
   });
 
   it('should initialize with the given initial count', () => {
