@@ -3,6 +3,12 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+	"scripts": {
+		"homework:build": "tsc --project homework/tsconfig.json",
+		"homework:typecheck": "tsc --project homework/tsconfig.json --noEmit",
+		"homework:test": "bun test homework/tests",
+		"homework:check": "bun run homework:typecheck && bun run homework:test && bun run homework:build"
+	},
   "devDependencies": {
     "@types/bun": "latest"
   },
