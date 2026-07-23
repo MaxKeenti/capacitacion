@@ -3,9 +3,82 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<meta name="theme-color" content="#080808">
+	<meta name="description" content="A retro terminal Pokédex powered by PokéAPI.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<title>Pokédex // Trainer Terminal</title>
 </head>
 <body>
+	<main class="terminal" aria-labelledby="page-title">
+		<header class="terminal-header">
+			<div class="brand-lockup">
+				<span class="brand-mark" aria-hidden="true"><i></i></span>
+				<h1 id="page-title">POKÉDEX</h1>
+			</div>
+			<p class="connection-status"><span class="status-light" aria-hidden="true"></span> LINK ESTABLISHED</p>
+		</header>
 
+		<section class="terminal-titlebar" aria-label="Application information">
+			<p>NATIONAL INDEX // TRAINER DATABASE</p>
+			<p class="titlebar-right">V2.0 <span aria-hidden="true">//</span> ONLINE</p>
+		</section>
+
+		<div class="pokedex-layout">
+			<section class="panel roster-panel" aria-labelledby="roster-title">
+				<div class="panel-heading">
+					<div>
+						<p class="eyebrow">DATABASE</p>
+						<h2 id="roster-title">POKÉMON ROSTER</h2>
+					</div>
+					<p id="roster-count" class="count-readout" aria-live="polite">CONNECTING</p>
+				</div>
+
+				<label class="search-field" for="pokemon-search">
+					<span>SEARCH INDEX</span>
+					<input id="pokemon-search" type="search" placeholder="NAME OR NUMBER" autocomplete="off" disabled>
+				</label>
+
+				<div id="pokemon-list" class="pokemon-list" aria-label="All Pokémon" aria-busy="true">
+					<p class="roster-message">RETRIEVING NATIONAL INDEX<span class="loading-dots" aria-hidden="true">...</span></p>
+				</div>
+
+				<footer class="roster-footer">
+					<p id="roster-summary" aria-live="polite">WAITING FOR DATABASE</p>
+					<p>↑ ↓ / CLICK TO SELECT</p>
+				</footer>
+			</section>
+
+			<section class="panel detail-panel" aria-labelledby="detail-title">
+				<div class="panel-heading detail-heading">
+					<div>
+						<p class="eyebrow">SELECTED SPECIMEN</p>
+						<h2 id="detail-title">DATA SCREEN</h2>
+					</div>
+					<p id="detail-number" class="count-readout">#----</p>
+				</div>
+
+				<div id="pokemon-detail" class="detail-screen" aria-live="polite" aria-busy="true">
+					<div class="screen-message">
+						<span class="screen-cursor" aria-hidden="true">&gt;</span>
+						<p>AWAITING INDEX DATA</p>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<footer class="terminal-footer">
+			<p>POKÉAPI DATA LINK</p>
+			<p>SELECT A SPECIMEN TO VIEW ITS RECORD</p>
+		</footer>
+	</main>
+
+	<noscript>
+		<p class="noscript-message">THIS POKÉDEX REQUIRES JAVASCRIPT TO CONTACT THE DATABASE.</p>
+	</noscript>
+
+	<script src="app.js" defer></script>
 </body>
 </html>
