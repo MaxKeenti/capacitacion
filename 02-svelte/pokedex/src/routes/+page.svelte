@@ -233,7 +233,7 @@
 </svelte:head>
 
 <main
-	class="mx-auto my-2 w-[calc(100%-1rem)] max-w-[1180px] border border-line bg-ink/90 shadow-[6px_6px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000] min-[431px]:my-9 min-[431px]:w-[calc(100%-2rem)] min-[431px]:shadow-[12px_12px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000]"
+	class="mx-auto my-2 w-[calc(100%-1rem)] max-w-295 border border-line bg-ink/90 shadow-[6px_6px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000] min-[431px]:my-9 min-[431px]:w-[calc(100%-2rem)] min-[431px]:shadow-[12px_12px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000]"
 	aria-labelledby="page-title"
 >
 	<header
@@ -276,7 +276,7 @@
 		</p>
 	</section>
 
-	<div class="grid min-h-[37rem] min-[761px]:grid-cols-[minmax(17rem,0.82fr)_minmax(0,1.18fr)]">
+	<div class="grid min-h-148 min-[761px]:grid-cols-[minmax(17rem,0.82fr)_minmax(0,1.18fr)]">
 		<section
 			class="flex min-w-0 flex-col border-b border-line bg-black/20 px-3 py-4.5 min-[431px]:px-4.5 min-[761px]:border-r min-[761px]:border-b-0"
 			aria-labelledby="roster-title"
@@ -313,14 +313,14 @@
 			</label>
 
 			<div
-				class="max-h-64 min-h-72 flex-none [scrollbar-width:thin] [scrollbar-color:var(--color-acid)_var(--color-panel-raised)] overflow-y-auto border border-line bg-[#050505] min-[761px]:max-h-[27rem] min-[761px]:flex-1 [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-panel-raised [&::-webkit-scrollbar-thumb]:bg-acid [&::-webkit-scrollbar-track]:bg-panel-raised"
+				class="max-h-64 min-h-72 flex-none scrollbar-thin [scrollbar-color:var(--color-acid)_var(--color-panel-raised)] overflow-y-auto border border-line bg-[#050505] min-[761px]:max-h-108 min-[761px]:flex-1 [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-panel-raised [&::-webkit-scrollbar-thumb]:bg-acid [&::-webkit-scrollbar-track]:bg-panel-raised"
 				aria-label="All Pokémon"
 				aria-busy={rosterStatus === 'loading'}
 			>
 				{#if rosterStatus === 'loading'}
 					<p class="p-4 text-muted">
 						RETRIEVING NATIONAL INDEX<span
-							class="inline-block w-6 [animation:dots_1.2s_steps(4,end)_infinite] overflow-hidden align-bottom"
+							class="inline-block w-6 animate-[dots_1.2s_steps(4,end)_infinite] overflow-hidden align-bottom"
 							aria-hidden="true">...</span
 						>
 					</p>
@@ -394,13 +394,13 @@
 			</div>
 
 			<div
-				class="relative mt-4 grid min-h-[22rem] flex-1 place-items-center overflow-hidden border-6 border-double border-line-bright bg-[repeating-linear-gradient(0deg,rgba(85,255,85,0.04)_0,rgba(85,255,85,0.04)_1px,transparent_1px,transparent_4px),#0a100a] p-5 shadow-[inset_0_0_50px_rgba(85,255,85,0.08)] before:pointer-events-none before:absolute before:top-3 before:left-3 before:text-[0.9rem] before:text-[rgba(228,242,33,0.3)] before:content-['[_RECORD_]'] after:pointer-events-none after:absolute after:right-3 after:bottom-2.5 after:text-[0.9rem] after:tracking-[0.25rem] after:text-[rgba(228,242,33,0.3)] after:content-['◼_◼_◼'] min-[761px]:min-h-[28rem]"
+				class="relative mt-4 grid min-h-88 flex-1 place-items-center overflow-hidden border-6 border-double border-line-bright bg-[repeating-linear-gradient(0deg,rgba(85,255,85,0.04)_0,rgba(85,255,85,0.04)_1px,transparent_1px,transparent_4px),#0a100a] p-5 shadow-[inset_0_0_50px_rgba(85,255,85,0.08)] before:pointer-events-none before:absolute before:top-3 before:left-3 before:text-[0.9rem] before:text-[rgba(228,242,33,0.3)] before:content-['[_RECORD_]'] after:pointer-events-none after:absolute after:right-3 after:bottom-2.5 after:text-[0.9rem] after:tracking-[0.25rem] after:text-[rgba(228,242,33,0.3)] after:content-['◼_◼_◼'] min-[761px]:min-h-112"
 				aria-live="polite"
 				aria-busy={detailStatus === 'loading'}
 			>
 				{#if detailStatus === 'loading'}
 					<div class="flex items-center gap-2 text-phosphor">
-						<span class="[animation:blink_0.9s_steps(2,start)_infinite]" aria-hidden="true"
+						<span class="animate-[blink_0.9s_steps(2,start)_infinite]" aria-hidden="true"
 							>&gt;</span
 						>
 						<p>
@@ -443,7 +443,7 @@
 						<div class="min-w-0">
 							<p class="mb-2 text-[0.95rem] text-muted">REGISTERED NAME</p>
 							<h3
-								class="mb-3 font-heading text-[clamp(0.8rem,2vw,1.25rem)] leading-[1.7] font-normal break-words text-acid min-[431px]:mb-5"
+								class="mb-3 font-heading text-[clamp(0.8rem,2vw,1.25rem)] leading-[1.7] font-normal wrap-break-word text-acid min-[431px]:mb-5"
 							>
 								{formatName(selectedPokemon.name)}
 							</h3>
