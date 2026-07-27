@@ -107,6 +107,31 @@
 		);
 	}
 
+	function typeColorClass(type: string) {
+		const colors: Record<string, string> = {
+			normal: 'text-[#e4e4e4]',
+			fire: 'text-[#ffaf00]',
+			water: 'text-[#55aaff]',
+			electric: 'text-[#ffff00]',
+			grass: 'text-phosphor',
+			ice: 'text-[#55ffff]',
+			fighting: 'text-danger',
+			poison: 'text-[#ff55ff]',
+			ground: 'text-[#d7af5f]',
+			flying: 'text-[#afafff]',
+			psychic: 'text-[#ff55af]',
+			bug: 'text-[#afd700]',
+			rock: 'text-[#d7af5f]',
+			ghost: 'text-[#af87ff]',
+			dragon: 'text-[#8787ff]',
+			dark: 'text-[#c6c6c6]',
+			steel: 'text-muted',
+			fairy: 'text-[#ff87d7]'
+		};
+
+		return colors[type] ?? 'text-text';
+	}
+
 	function useFallbackSprite(event: Event, pokemon: Pokemon) {
 		const image = event.currentTarget as HTMLImageElement;
 		if (pokemon.sprites.front_default && image.src !== pokemon.sprites.front_default) {
@@ -207,30 +232,65 @@
 	/>
 </svelte:head>
 
-<main class="terminal" aria-labelledby="page-title">
-	<header class="terminal-header">
-		<div class="brand-lockup">
-			<span class="brand-mark" aria-hidden="true"><i></i></span>
-			<h1 id="page-title">POKÉDEX</h1>
+<main
+	class="mx-auto my-2 w-[calc(100%-1rem)] max-w-[1180px] border border-line bg-ink/90 shadow-[6px_6px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000] min-[431px]:my-9 min-[431px]:w-[calc(100%-2rem)] min-[431px]:shadow-[12px_12px_0_rgba(0,0,0,0.55),inset_0_0_0_1px_#000]"
+	aria-labelledby="page-title"
+>
+	<header
+		class="flex items-center justify-between gap-4 border-b border-line px-3 py-4 min-[431px]:px-5"
+	>
+		<div class="flex items-center gap-3.5">
+			<span
+				class="relative inline-block size-6.5 rounded-full border-[3px] border-text bg-[linear-gradient(to_bottom,#ff5555_0_44%,#eeeeee_44%_56%,#080808_56%)] shadow-[0_0_0_2px_#080808,0_0_0_3px_#eeeeee]"
+				aria-hidden="true"
+			>
+				<i
+					class="absolute top-1/2 left-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-text bg-ink"
+				></i>
+			</span>
+			<h1
+				class="font-heading text-[clamp(0.9rem,2.3vw,1.2rem)] font-normal tracking-[0.08em] text-acid"
+				id="page-title"
+			>
+				POKÉDEX
+			</h1>
 		</div>
-		<p class="connection-status">
-			<span class="status-light" aria-hidden="true"></span> LINK ESTABLISHED
+		<p
+			class="hidden items-center gap-2 text-[0.95rem] whitespace-nowrap text-phosphor min-[761px]:flex"
+		>
+			<span
+				class="size-2 rounded-full bg-phosphor shadow-[0_0_9px_var(--color-phosphor)]"
+				aria-hidden="true"
+			></span>
+			LINK ESTABLISHED
 		</p>
 	</header>
 
-	<section class="terminal-titlebar" aria-label="Application information">
+	<section
+		class="flex min-h-9.5 items-center justify-between gap-4 border-b border-line bg-panel-raised px-3 py-2 text-[0.8rem] text-muted min-[431px]:px-5 min-[761px]:text-[0.95rem]"
+		aria-label="Application information"
+	>
 		<p>NATIONAL INDEX // TRAINER DATABASE</p>
-		<p class="titlebar-right">V2.0 <span aria-hidden="true">//</span> ONLINE</p>
+		<p class="hidden text-acid min-[761px]:block">
+			V2.0 <span aria-hidden="true">//</span> ONLINE
+		</p>
 	</section>
 
-	<div class="pokedex-layout">
-		<section class="panel roster-panel" aria-labelledby="roster-title">
-			<div class="panel-heading">
+	<div class="grid min-h-[37rem] min-[761px]:grid-cols-[minmax(17rem,0.82fr)_minmax(0,1.18fr)]">
+		<section
+			class="flex min-w-0 flex-col border-b border-line bg-black/20 px-3 py-4.5 min-[431px]:px-4.5 min-[761px]:border-r min-[761px]:border-b-0"
+			aria-labelledby="roster-title"
+		>
+			<div
+				class="flex items-center justify-between gap-4 border-b-3 border-double border-line-bright pb-4"
+			>
 				<div>
-					<p class="eyebrow">DATABASE</p>
-					<h2 id="roster-title">POKÉMON ROSTER</h2>
+					<p class="mb-2 text-[0.95rem] text-acid">DATABASE</p>
+					<h2 class="font-heading text-[0.65rem] leading-[1.6] font-normal" id="roster-title">
+						POKÉMON ROSTER
+					</h2>
 				</div>
-				<p class="count-readout" aria-live="polite">
+				<p class="text-right text-[0.95rem] text-muted" aria-live="polite">
 					{rosterStatus === 'ready'
 						? `${allPokemon.length} FOUND`
 						: rosterStatus === 'error'
@@ -239,9 +299,10 @@
 				</p>
 			</div>
 
-			<label class="search-field" for="pokemon-search">
-				<span>SEARCH INDEX</span>
+			<label class="my-4 grid gap-2 text-muted" for="pokemon-search">
+				<span class="text-[0.95rem]">SEARCH INDEX</span>
 				<input
+					class="w-full rounded-none border border-line bg-ink px-2.5 py-2 text-acid shadow-[inset_3px_3px_0_rgba(0,0,0,0.7)] placeholder:text-[#707070] focus:outline-3 focus:outline-offset-2 focus:outline-acid disabled:cursor-wait"
 					id="pokemon-search"
 					type="search"
 					placeholder="NAME OR NUMBER"
@@ -251,38 +312,58 @@
 				/>
 			</label>
 
-			<div class="pokemon-list" aria-label="All Pokémon" aria-busy={rosterStatus === 'loading'}>
+			<div
+				class="max-h-64 min-h-72 flex-none [scrollbar-width:thin] [scrollbar-color:var(--color-acid)_var(--color-panel-raised)] overflow-y-auto border border-line bg-[#050505] min-[761px]:max-h-[27rem] min-[761px]:flex-1 [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-panel-raised [&::-webkit-scrollbar-thumb]:bg-acid [&::-webkit-scrollbar-track]:bg-panel-raised"
+				aria-label="All Pokémon"
+				aria-busy={rosterStatus === 'loading'}
+			>
 				{#if rosterStatus === 'loading'}
-					<p class="roster-message">
-						RETRIEVING NATIONAL INDEX<span class="loading-dots" aria-hidden="true">...</span>
+					<p class="p-4 text-muted">
+						RETRIEVING NATIONAL INDEX<span
+							class="inline-block w-6 [animation:dots_1.2s_steps(4,end)_infinite] overflow-hidden align-bottom"
+							aria-hidden="true">...</span
+						>
 					</p>
 				{:else if rosterStatus === 'error'}
-					<div class="detail-error roster-message">
+					<div class="p-4 text-center text-danger">
 						<p>DATABASE LINK FAILED.</p>
-						<p>CHECK YOUR CONNECTION, THEN TRY AGAIN.</p>
-						<button class="retry-button" type="button" onclick={loadPokedex}>RETRY LINK</button>
+						<p class="mt-3 text-text">CHECK YOUR CONNECTION, THEN TRY AGAIN.</p>
+						<button
+							class="mt-4 cursor-pointer border border-acid bg-transparent px-3 py-1.5 text-acid hover:bg-acid hover:text-ink focus:outline-3 focus:outline-offset-2 focus:outline-acid"
+							type="button"
+							onclick={loadPokedex}>RETRY LINK</button
+						>
 					</div>
 				{:else}
 					{#each filteredPokemon as pokemon (pokemon.id)}
 						<button
 							type="button"
-							class="pokemon-entry"
+							class={[
+								'grid min-h-9.5 w-full cursor-pointer grid-cols-[4.1rem_1fr_auto] items-center border-0 border-b border-[#2d2d2d] px-2 py-1.5 text-left focus:outline-3 focus:outline-offset-2 focus:outline-acid',
+								pokemon.name === selectedName
+									? "bg-acid text-ink after:text-[0.7rem] after:content-['◀']"
+									: 'bg-transparent text-text hover:bg-[#262626] hover:text-acid'
+							]}
 							data-pokemon-name={pokemon.name}
 							aria-current={pokemon.name === selectedName}
 							aria-label={`${formatNumber(pokemon.id)} ${formatName(pokemon.name)}`}
 							onclick={(event) => void selectPokemon(pokemon.name, event.currentTarget)}
 							onkeydown={(event) => handleRosterKeydown(event, pokemon)}
 						>
-							<span class="entry-number">{formatNumber(pokemon.id)}</span>
-							<span class="entry-name">{formatName(pokemon.name)}</span>
+							<span class={pokemon.name === selectedName ? 'text-ink' : 'text-muted'}>
+								{formatNumber(pokemon.id)}
+							</span>
+							<span class="overflow-hidden text-ellipsis whitespace-nowrap">
+								{formatName(pokemon.name)}
+							</span>
 						</button>
 					{:else}
-						<p class="roster-message">NO SPECIMENS MATCH THIS SEARCH.</p>
+						<p class="p-4 text-muted">NO SPECIMENS MATCH THIS SEARCH.</p>
 					{/each}
 				{/if}
 			</div>
 
-			<footer class="roster-footer">
+			<footer class="flex items-center justify-between gap-4 pt-3 text-[0.95rem] text-muted">
 				<p aria-live="polite">
 					{rosterStatus === 'ready'
 						? `${filteredPokemon.length} OF ${allPokemon.length} DISPLAYED`
@@ -290,23 +371,38 @@
 							? 'NO INDEX DATA'
 							: 'WAITING FOR DATABASE'}
 				</p>
-				<p>↑ ↓ / CLICK TO SELECT</p>
+				<p class="hidden text-right min-[431px]:block">↑ ↓ / CLICK TO SELECT</p>
 			</footer>
 		</section>
 
-		<section class="panel detail-panel" aria-labelledby="detail-title">
-			<div class="panel-heading detail-heading">
+		<section
+			class="flex min-w-0 flex-col bg-[linear-gradient(135deg,rgba(228,242,33,0.045),transparent_43%)] px-3 py-4.5 min-[431px]:px-4.5"
+			aria-labelledby="detail-title"
+		>
+			<div
+				class="flex items-center justify-between gap-4 border-b-3 border-double border-line-bright pb-4"
+			>
 				<div>
-					<p class="eyebrow">SELECTED SPECIMEN</p>
-					<h2 id="detail-title">DATA SCREEN</h2>
+					<p class="mb-2 text-[0.95rem] text-acid">SELECTED SPECIMEN</p>
+					<h2 class="font-heading text-[0.65rem] leading-[1.6] font-normal" id="detail-title">
+						DATA SCREEN
+					</h2>
 				</div>
-				<p class="count-readout">{formatNumber(selectedRosterPokemon?.id)}</p>
+				<p class="text-right text-[0.95rem] text-muted">
+					{formatNumber(selectedRosterPokemon?.id)}
+				</p>
 			</div>
 
-			<div class="detail-screen" aria-live="polite" aria-busy={detailStatus === 'loading'}>
+			<div
+				class="relative mt-4 grid min-h-[22rem] flex-1 place-items-center overflow-hidden border-6 border-double border-line-bright bg-[repeating-linear-gradient(0deg,rgba(85,255,85,0.04)_0,rgba(85,255,85,0.04)_1px,transparent_1px,transparent_4px),#0a100a] p-5 shadow-[inset_0_0_50px_rgba(85,255,85,0.08)] before:pointer-events-none before:absolute before:top-3 before:left-3 before:text-[0.9rem] before:text-[rgba(228,242,33,0.3)] before:content-['[_RECORD_]'] after:pointer-events-none after:absolute after:right-3 after:bottom-2.5 after:text-[0.9rem] after:tracking-[0.25rem] after:text-[rgba(228,242,33,0.3)] after:content-['◼_◼_◼'] min-[761px]:min-h-[28rem]"
+				aria-live="polite"
+				aria-busy={detailStatus === 'loading'}
+			>
 				{#if detailStatus === 'loading'}
-					<div class="screen-message">
-						<span class="screen-cursor" aria-hidden="true">&gt;</span>
+					<div class="flex items-center gap-2 text-phosphor">
+						<span class="[animation:blink_0.9s_steps(2,start)_infinite]" aria-hidden="true"
+							>&gt;</span
+						>
 						<p>
 							{selectedName
 								? `RETRIEVING ${formatName(selectedName).toUpperCase()}`
@@ -314,22 +410,28 @@
 						</p>
 					</div>
 				{:else if detailStatus === 'error'}
-					<div class="detail-error">
+					<div class="max-w-96 text-center text-danger">
 						<p>SPECIMEN RECORD UNAVAILABLE.</p>
-						<p>THE DATABASE LINK WAS INTERRUPTED.</p>
+						<p class="mt-3 text-text">THE DATABASE LINK WAS INTERRUPTED.</p>
 						{#if selectedName}
 							<button
-								class="retry-button"
+								class="mt-4 cursor-pointer border border-acid bg-transparent px-3 py-1.5 text-acid hover:bg-acid hover:text-ink focus:outline-3 focus:outline-offset-2 focus:outline-acid"
 								type="button"
 								onclick={() => void selectPokemon(selectedName)}>RETRY RECORD</button
 							>
 						{/if}
 					</div>
 				{:else if selectedPokemon}
-					<article class="pokemon-record" aria-label={`${formatName(selectedPokemon.name)} record`}>
-						<div class="sprite-well">
+					<article
+						class="relative z-1 grid w-full max-w-xl grid-cols-1 items-center gap-4 min-[431px]:grid-cols-[minmax(9rem,0.85fr)_minmax(12rem,1.15fr)] min-[431px]:gap-[clamp(1rem,4vw,2.5rem)]"
+						aria-label={`${formatName(selectedPokemon.name)} record`}
+					>
+						<div
+							class="grid min-h-36 place-items-center border border-[rgba(228,242,33,0.55)] bg-[radial-gradient(circle,rgba(85,255,85,0.12)_0,transparent_69%)] min-[431px]:min-h-50"
+						>
 							{#if getSprite(selectedPokemon)}
 								<img
+									class="h-auto max-h-36 w-36 object-contain drop-shadow-[4px_4px_0_rgba(0,0,0,0.7)] [image-rendering:pixelated] min-[431px]:max-h-52 min-[431px]:w-full min-[431px]:max-w-48"
 									src={getSprite(selectedPokemon)}
 									alt={`${formatName(selectedPokemon.name)} pixel sprite`}
 									onerror={(event) => selectedPokemon && useFallbackSprite(event, selectedPokemon)}
@@ -338,13 +440,22 @@
 								<p>SPRITE UNAVAILABLE</p>
 							{/if}
 						</div>
-						<div class="record-data">
-							<p class="record-label">REGISTERED NAME</p>
-							<h3 class="record-name">{formatName(selectedPokemon.name)}</h3>
-							<p class="type-label">ELEMENTAL TYPE</p>
-							<div class="type-list">
+						<div class="min-w-0">
+							<p class="mb-2 text-[0.95rem] text-muted">REGISTERED NAME</p>
+							<h3
+								class="mb-3 font-heading text-[clamp(0.8rem,2vw,1.25rem)] leading-[1.7] font-normal break-words text-acid min-[431px]:mb-5"
+							>
+								{formatName(selectedPokemon.name)}
+							</h3>
+							<p class="mb-2.5 text-muted">ELEMENTAL TYPE</p>
+							<div class="flex flex-wrap gap-2">
 								{#each [...selectedPokemon.types].sort((a, b) => a.slot - b.slot) as pokemonType (pokemonType.slot)}
-									<span class="type-badge" data-type={pokemonType.type.name}>
+									<span
+										class={[
+											'border border-current px-2 py-1 text-base leading-none uppercase',
+											typeColorClass(pokemonType.type.name)
+										]}
+									>
 										{pokemonType.type.name}
 									</span>
 								{/each}
@@ -356,12 +467,14 @@
 		</section>
 	</div>
 
-	<footer class="terminal-footer">
+	<footer
+		class="flex min-h-10 items-center justify-between gap-4 border-t border-line bg-panel-raised px-3 py-2 text-[0.9rem] text-muted min-[431px]:px-5"
+	>
 		<p>POKÉAPI DATA LINK</p>
-		<p>SELECT A SPECIMEN TO VIEW ITS RECORD</p>
+		<p class="hidden min-[431px]:block">SELECT A SPECIMEN TO VIEW ITS RECORD</p>
 	</footer>
 </main>
 
 <noscript>
-	<p class="noscript-message">THIS POKÉDEX REQUIRES JAVASCRIPT TO CONTACT THE DATABASE.</p>
+	<p class="m-4 font-mono text-acid">THIS POKÉDEX REQUIRES JAVASCRIPT TO CONTACT THE DATABASE.</p>
 </noscript>
