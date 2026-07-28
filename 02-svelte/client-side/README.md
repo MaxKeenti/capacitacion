@@ -1,42 +1,18 @@
-# sv
+# Aplicación solo cliente
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Ejemplo pequeño de una SPA de SvelteKit que se ejecuta únicamente en el navegador.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
+## Ejecutar
 
 ```sh
-# create a new project
-npx sv create my-app
+bun run dev
 ```
 
-To recreate this project with the same configuration:
+Abre la dirección que aparece en la terminal. El archivo `src/routes/+layout.ts` desactiva SSR
+con `ssr = false`, mientras que `adapter-static` genera archivos aptos para hosting estático.
 
-```sh
-# recreate this project
-bun x sv@0.16.6 create --template minimal --types ts --add prettier eslint vitest="usages:unit,component" tailwindcss="plugins:typography,forms" sveltekit-adapter="adapter:node" mcp="ide:claude-code,other+setup:local" --install bun client-side
-```
+## Archivos para estudiar
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- `src/routes/+layout.ts`: convierte toda la aplicación en client-only.
+- `src/routes/+page.svelte`: estado reactivo y eventos del navegador.
+- `vite.config.ts`: configura una compilación estática con una página fallback.
